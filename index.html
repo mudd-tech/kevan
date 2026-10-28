@@ -1,19 +1,39 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>كيفان لاستيراد وتجارة البن الأخضر | Kayfan Coffeehouse</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-deep: #121A0F;
-            --card-surface: #F7EFE6; /* لون خلفية اللوجو تماماً */
-            --brand-dark: #23400D;   /* الأخضر الزيتي الداكن من اللوجو */
-            --brand-olive: #787C44;  /* الزيتوني المتناسق */
-            --text-dark: #1A2611;
+        /* الألوان الافتراضية (Dark Mode) */
+        :root[data-theme="dark"] {
+            --bg-base: #070B05;
+            --card-surface: rgba(18, 26, 15, 0.9);
+            --card-border: rgba(165, 170, 114, 0.25);
+            --brand-gold: #D4AF37;
+            --brand-olive: #787C44;
+            --text-main: #F7EFE6;
+            --text-muted: #B8BFA0;
+            --item-bg: rgba(255, 255, 255, 0.04);
+            --item-border: rgba(255, 255, 255, 0.06);
+            --dropdown-bg: rgba(10, 15, 8, 0.96);
+            --shadow-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* وضع الإضاءة (Light Mode) */
+        :root[data-theme="light"] {
+            --bg-base: #EAE3D5;
+            --card-surface: #F7EFE6;
+            --card-border: rgba(120, 124, 68, 0.3);
+            --brand-gold: #8B7322;
+            --brand-olive: #787C44;
+            --text-main: #1A2611;
             --text-muted: #5E6652;
-            --white: #FFFFFF;
+            --item-bg: #FFFFFF;
+            --item-border: rgba(35, 64, 13, 0.1);
+            --dropdown-bg: #FFFFFF;
+            --shadow-color: rgba(26, 38, 17, 0.15);
         }
 
         * {
@@ -22,14 +42,15 @@
             padding: 0;
             font-family: 'Cairo', sans-serif;
             -webkit-tap-highlight-color: transparent;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
 
         body {
-            background-color: var(--bg-deep);
+            background-color: var(--bg-base);
             background-image: 
-                radial-gradient(circle at 50% 0%, rgba(35, 64, 13, 0.45) 0%, transparent 60%),
-                radial-gradient(circle at 50% 100%, rgba(18, 26, 15, 0.9) 0%, transparent 100%);
-            color: var(--text-dark);
+                radial-gradient(circle at 50% -20%, rgba(120, 124, 68, 0.3) 0%, transparent 60%),
+                radial-gradient(circle at 50% 120%, rgba(30, 51, 12, 0.4) 0%, transparent 70%);
+            color: var(--text-main);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -39,21 +60,66 @@
 
         .profile-card {
             width: 100%;
-            max-width: 420px;
-            background-color: var(--card-surface);
-            border-radius: 32px;
-            padding: 36px 22px 28px;
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            max-width: 430px;
+            background: var(--card-surface);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--card-border);
+            border-radius: 36px;
+            padding: 38px 24px 24px;
+            box-shadow: 0 40px 90px var(--shadow-color);
             text-align: center;
             position: relative;
-            border: 1px solid rgba(120, 124, 68, 0.25);
+            overflow: hidden;
+        }
+
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 180px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--brand-gold), var(--brand-olive), transparent);
+            box-shadow: 0 0 15px var(--brand-gold);
+        }
+
+        /* زر تغيير المظهر (Dark/Light Toggle) */
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--item-bg);
+            border: 1px solid var(--card-border);
+            color: var(--brand-gold);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            border-color: var(--brand-gold);
+        }
+
+        .theme-toggle svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
         }
 
         /* حاوية الشعار */
         .main-logo-wrapper {
-            width: 190px;
-            height: 100px;
-            margin: 0 auto 10px auto;
+            width: 180px;
+            height: 95px;
+            margin: 0 auto 12px auto;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -63,35 +129,36 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
         }
 
         .business-subtitle {
             display: inline-block;
-            color: var(--brand-dark);
-            background-color: rgba(120, 124, 68, 0.12);
-            padding: 5px 18px;
+            color: var(--brand-gold);
+            background: rgba(212, 175, 55, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 5px 20px;
             border-radius: 50px;
-            font-size: 13.5px;
+            font-size: 13px;
             font-weight: 800;
-            margin-bottom: 20px;
-            letter-spacing: 0.2px;
+            margin-bottom: 22px;
+            letter-spacing: 0.5px;
         }
 
         /* الفروع */
         .locations-box {
             display: flex;
             gap: 10px;
-            margin-bottom: 22px;
+            margin-bottom: 24px;
             text-align: right;
         }
 
         .location-item {
             flex: 1;
-            background-color: var(--white);
+            background: var(--item-bg);
             padding: 12px 14px;
             border-radius: 16px;
-            border: 1px solid rgba(35, 64, 13, 0.08);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            border: 1px solid var(--item-border);
         }
 
         .location-label {
@@ -103,13 +170,13 @@
 
         .location-text {
             font-size: 12.5px;
-            color: var(--text-dark);
-            font-weight: 800;
+            color: var(--text-main);
+            font-weight: 700;
             line-height: 1.4;
         }
 
-        /* الأزرار الرئيسية */
-        .action-btn {
+        /* الأزرار المضيئة الفاخرة */
+        .action-btn, .drawer-toggle-btn {
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -120,66 +187,53 @@
             text-decoration: none;
             font-weight: 800;
             font-size: 14.5px;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
-            border: none;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .action-btn:hover {
-            transform: translateY(-2px);
-            filter: brightness(1.05);
-        }
-
-        /* زر إنستاباي - الزر الرئيسي باللون الزيتي الداكن للبراند */
         .btn-instapay {
-            background-color: var(--brand-dark);
-            color: var(--card-surface);
-            box-shadow: 0 10px 25px rgba(35, 64, 13, 0.25);
+            background: linear-gradient(135deg, #284c10 0%, #172b08 100%);
+            color: #F7EFE6;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            box-shadow: 0 8px 25px rgba(40, 76, 16, 0.3);
+        }
+
+        .btn-instapay:hover {
+            transform: translateY(-3px);
+            border-color: var(--brand-gold);
+            box-shadow: 0 12px 30px rgba(212, 175, 55, 0.25);
         }
 
         .btn-arrow {
             font-size: 16px;
-            opacity: 0.8;
-        }
-
-        /* القوائم المنسدلة */
-        .drawer-wrapper {
-            margin: 12px 0;
+            color: var(--brand-gold);
         }
 
         .drawer-toggle-btn {
-            background-color: var(--white);
-            color: var(--text-dark);
-            width: 100%;
-            padding: 16px 20px;
-            border-radius: 18px;
-            font-weight: 800;
-            font-size: 14.5px;
-            border: 1px solid rgba(35, 64, 13, 0.12);
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-            transition: all 0.25s ease;
+            background: var(--item-bg);
+            color: var(--text-main);
+            border: 1px solid var(--item-border);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
 
         .drawer-toggle-btn:hover {
-            border-color: var(--brand-dark);
-            background-color: #FCF9F5;
+            transform: translateY(-3px);
+            border-color: var(--brand-gold);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.15);
         }
 
         .arrow-icon {
             font-size: 12px;
-            color: var(--brand-olive);
+            color: var(--brand-gold);
             transition: transform 0.35s ease;
         }
 
+        /* القائمة المنسدلة */
         .dropdown-box {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1), padding 0.35s ease;
-            background-color: var(--white);
+            background: var(--dropdown-bg);
             border-radius: 18px;
             margin-top: 6px;
             padding: 0 14px;
@@ -188,15 +242,16 @@
         .dropdown-box.open {
             max-height: 480px;
             padding: 14px;
-            border: 1px solid rgba(35, 64, 13, 0.12);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.04);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
         }
 
         .bank-title-tag {
             font-size: 12px;
             font-weight: 800;
-            color: var(--brand-dark);
-            background-color: rgba(120, 124, 68, 0.12);
+            color: var(--brand-gold);
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.2);
             padding: 6px 14px;
             border-radius: 10px;
             margin-bottom: 12px;
@@ -204,7 +259,7 @@
         }
 
         .data-card-item {
-            background-color: var(--card-surface);
+            background: var(--item-bg);
             padding: 12px 14px;
             border-radius: 14px;
             display: flex;
@@ -212,7 +267,7 @@
             align-items: center;
             gap: 10px;
             margin-bottom: 8px;
-            border: 1px solid rgba(35, 64, 13, 0.04);
+            border: 1px solid var(--item-border);
         }
 
         .data-card-item:last-child {
@@ -233,7 +288,7 @@
 
         .data-number {
             font-size: 13.5px;
-            color: var(--text-dark);
+            color: var(--text-main);
             font-weight: 800;
             direction: ltr;
             text-align: right;
@@ -241,27 +296,25 @@
         }
 
         .copy-trigger {
-            background-color: var(--brand-dark);
-            color: var(--card-surface);
+            background: linear-gradient(135deg, var(--brand-gold) 0%, #b8972d 100%);
+            color: #070B05;
             border: none;
             padding: 7px 16px;
             border-radius: 10px;
             font-size: 12px;
-            font-weight: 800;
+            font-weight: 900;
             cursor: pointer;
             flex-shrink: 0;
             transition: 0.2s;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
         }
 
         .copy-trigger:hover {
-            background-color: #355c18;
+            transform: scale(1.05);
+            filter: brightness(1.1);
         }
 
-        .copy-trigger:active {
-            transform: scale(0.92);
-        }
-
-        /* أزرار السوشيال ميديا باللغة الإنجليزية وبأيقونات نظيفة */
+        /* أزرار السوشيال ميديا باللغة الإنجليزية */
         .social-matrix {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -275,22 +328,22 @@
             text-decoration: none;
             font-weight: 800;
             font-size: 14px;
-            background-color: var(--white);
-            color: var(--text-dark);
-            border: 1px solid rgba(35, 64, 13, 0.12);
+            background: var(--item-bg);
+            color: var(--text-main);
+            border: 1px solid var(--item-border);
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-            transition: all 0.25s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
         }
 
         .social-link:hover {
-            background-color: var(--brand-dark);
-            color: var(--card-surface);
-            border-color: var(--brand-dark);
-            transform: translateY(-2px);
+            background: rgba(212, 175, 55, 0.12);
+            color: var(--brand-gold);
+            border-color: var(--brand-gold);
+            transform: translateY(-3px);
         }
 
         .social-link svg {
@@ -302,48 +355,86 @@
         /* بانر Tapio */
         .self-promo-banner {
             margin-top: 22px;
-            background-color: rgba(120, 124, 68, 0.1);
-            border: 1px dashed var(--brand-olive);
+            background: linear-gradient(135deg, rgba(30, 51, 12, 0.15) 0%, rgba(10, 15, 8, 0.3) 100%);
+            border: 1px dashed rgba(212, 175, 55, 0.4);
             padding: 18px 16px;
             border-radius: 20px;
         }
 
         .promo-desc {
             font-size: 12.5px;
-            color: var(--text-dark);
+            color: var(--text-muted);
             margin-bottom: 12px;
             font-weight: 800;
         }
 
         .promo-action-btn {
             display: block;
-            background-color: var(--brand-olive);
-            color: var(--white);
+            background: linear-gradient(135deg, var(--brand-gold) 0%, #b8972d 100%);
+            color: #070B05;
             text-decoration: none;
             padding: 12px;
             border-radius: 14px;
-            font-weight: 800;
+            font-weight: 900;
             font-size: 13.5px;
-            transition: all 0.25s ease;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
         }
 
         .promo-action-btn:hover {
-            background-color: var(--brand-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.5);
         }
 
         .brand-footer {
-            margin-top: 22px;
+            margin-top: 20px;
             font-size: 12px;
             color: var(--text-muted);
-            border-top: 1px solid rgba(35, 64, 13, 0.1);
-            padding-top: 16px;
+            border-top: 1px solid var(--item-border);
+            padding-top: 14px;
             font-weight: 700;
+            letter-spacing: 0.5px;
         }
 
         .brand-footer span {
-            color: var(--brand-dark);
+            color: var(--brand-gold);
             font-weight: 900;
         }
+
+        /* حبوب البن في الأسفل تماماً */
+        .coffee-beans-footer {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 14px;
+            opacity: 0.65;
+        }
+
+        .coffee-bean {
+            width: 14px;
+            height: 9px;
+            background: var(--brand-gold);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: relative;
+            transform: rotate(-25deg);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .coffee-bean::after {
+            content: '';
+            position: absolute;
+            top: 1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 7px;
+            background: var(--bg-base);
+            border-radius: 1px;
+        }
+
+        .coffee-bean:nth-child(2) { transform: rotate(15deg); }
+        .coffee-bean:nth-child(3) { transform: rotate(-10deg); }
+        .coffee-bean:nth-child(4) { transform: rotate(35deg); }
 
         /* إشعار النسخ */
         .copy-toast {
@@ -351,14 +442,13 @@
             bottom: 24px;
             left: 50%;
             transform: translateX(-50%) translateY(80px);
-            background-color: var(--brand-dark);
-            color: var(--card-surface);
-            padding: 10px 24px;
+            background: var(--brand-gold);
+            color: #070B05;
+            padding: 11px 26px;
             border-radius: 50px;
-            font-size: 13.5px;
-            font-weight: 800;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border: 2px solid var(--brand-olive);
+            font-size: 14px;
+            font-weight: 900;
+            box-shadow: 0 10px 35px rgba(212, 175, 55, 0.4);
             opacity: 0;
             transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 999;
@@ -374,6 +464,13 @@
 <body>
 
     <div class="profile-card">
+        <!-- زر تبديل المظهر Dark/Light -->
+        <button class="theme-toggle" onclick="toggleTheme()" title="تغيير المظهر">
+            <svg id="themeIcon" viewBox="0 0 24 24">
+                <path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.38 5.38 0 0 1-4.4 4.4 5.38 5.38 0 0 1-4.4-4.4A9 9 0 0 1 12 3z"/>
+            </svg>
+        </button>
+
         <!-- شعار كيفان -->
         <div class="main-logo-wrapper">
             <img src="logo.jpg" alt="Kayfan Coffeehouse Logo" class="main-logo">
@@ -400,7 +497,7 @@
         </a>
 
         <!-- الحساب البنكي - بنك المشرق -->
-        <div class="drawer-wrapper">
+        <div class="drawer-wrapper" style="margin: 12px 0;">
             <button class="drawer-toggle-btn" onclick="toggleDrawer('bankDrawer', 'bankArrow')">
                 <span>الحساب البنكي (Mashreq Bank)</span>
                 <span id="bankArrow" class="arrow-icon">▼</span>
@@ -435,7 +532,7 @@
         </div>
 
         <!-- المحافظ الإلكترونية -->
-        <div class="drawer-wrapper">
+        <div class="drawer-wrapper" style="margin: 12px 0;">
             <button class="drawer-toggle-btn" onclick="toggleDrawer('walletDrawer', 'walletArrow')">
                 <span>محافظ فودافون كاش</span>
                 <span id="walletArrow" class="arrow-icon">▼</span>
@@ -481,17 +578,38 @@
         <div class="brand-footer">
             Powered by <span>Tapio</span> 🚀
         </div>
+
+        <!-- حبوب البن أسفل الصفحة -->
+        <div class="coffee-beans-footer">
+            <div class="coffee-bean"></div>
+            <div class="coffee-bean"></div>
+            <div class="coffee-bean"></div>
+            <div class="coffee-bean"></div>
+        </div>
     </div>
 
     <div id="copyToast" class="copy-toast">تم النسخ بنجاح ✓</div>
 
     <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute("data-theme");
+            const newTheme = currentTheme === "dark" ? "light" : "dark";
+            html.setAttribute("data-theme", newTheme);
+            localStorage.setItem("theme", newTheme);
+        }
+
+        // استعادة الوضع المحفوظ للمستخدم
+        window.addEventListener("DOMContentLoaded", () => {
+            const savedTheme = localStorage.getItem("theme") || "dark";
+            document.documentElement.setAttribute("data-theme", savedTheme);
+        });
+
         function toggleDrawer(drawerId, arrowId) {
             var drawer = document.getElementById(drawerId);
             var arrow = document.getElementById(arrowId);
             var isOpen = drawer.classList.contains("open");
 
-            // إغلاق أي قائمة مفتوحة أخرى
             document.getElementById("bankDrawer").classList.remove("open");
             document.getElementById("walletDrawer").classList.remove("open");
             document.getElementById("bankArrow").style.transform = "rotate(0deg)";
