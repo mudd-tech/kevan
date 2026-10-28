@@ -3,36 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>كيفان لاستيراد وتجارة البن الأخضر</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>كيفان لاستيراد وتجارة البن الأخضر | البوابة الذكية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-page: #EAE3D5;
-            --surface-card: #F6EFE6; /* مطابق لخلفية اللوجو تماماً */
-            --surface-item: #FCF9F5;
-            --brand-primary: #23400D; /* الأخضر الداكن من اللوجو */
-            --brand-olive: #787C44;   /* الزيتوني من حبة البن */
-            --brand-olive-soft: rgba(120, 124, 68, 0.12);
-            --text-dark: #1A2611;
-            --text-muted: #6E7563;
-            --border-subtle: rgba(35, 64, 13, 0.1);
-            --border-hover: rgba(35, 64, 13, 0.25);
-        }
-
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'IBM Plex Sans Arabic', sans-serif;
-            -webkit-tap-highlight-color: transparent;
+            font-family: 'Cairo', sans-serif;
         }
 
         body {
-            background-color: var(--bg-page);
-            background-image: radial-gradient(circle at 50% 0%, #F6EFE6 0%, #E5DEC9 100%);
-            color: var(--text-dark);
+            /* خلفية خارجية باللون الأخضر الزيتي الداكن من هوية اللوجو */
+            background-color: #182B09;
+            background-image: radial-gradient(circle at 50% 0%, #264210 0%, #111F06 100%);
+            color: #1E330C;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -40,298 +25,444 @@
             padding: 24px 16px;
         }
 
-        .container {
+        /* البطاقة بنفس درجة اللون الكريمي لخلفية اللوجو */
+        .profile-card {
             width: 100%;
             max-width: 420px;
-            background: var(--surface-card);
-            border: 1px solid rgba(35, 64, 13, 0.08);
+            background-color: #F7EFE6;
             border-radius: 28px;
-            padding: 36px 24px 28px;
-            box-shadow: 
-                0 20px 50px rgba(26, 38, 17, 0.08),
-                0 4px 12px rgba(26, 38, 17, 0.04);
-            position: relative;
-        }
-
-        /* قسم الشعار المتكامل بدون إطار */
-        .header {
+            padding: 32px 22px 26px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55);
             text-align: center;
-            margin-bottom: 24px;
+            border: 1px solid rgba(120, 124, 68, 0.3);
         }
 
-        .logo-box {
-            width: 180px;
-            height: 95px;
-            margin: 0 auto 10px;
+        /* حاوية الشعار متناسقة مع البطاقة */
+        .main-logo-wrapper {
+            width: 200px;
+            height: 105px;
+            margin: 0 auto 8px auto;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .logo-box img {
+        .main-logo {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            /* يدمج خلفية الصورة الكريمية مع البطاقة لتبدو شفافة تماماً */
-            mix-blend-mode: multiply;
         }
 
-        .subtitle {
+        .business-subtitle {
             display: inline-block;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--brand-primary);
-            background: var(--brand-olive-soft);
-            padding: 5px 16px;
-            border-radius: 100px;
-            letter-spacing: 0.2px;
+            color: #23400D;
+            background-color: rgba(120, 124, 68, 0.15);
+            padding: 4px 16px;
+            border-radius: 50px;
+            font-size: 13.5px;
+            font-weight: 700;
+            margin-bottom: 18px;
         }
 
-        /* الفروع بتصميم شبكي بسيط */
-        .locations-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+        /* صندوق العناوين */
+        .locations-box {
+            display: flex;
             gap: 10px;
-            margin-bottom: 24px;
-        }
-
-        .location-pill {
-            background: var(--surface-item);
-            border: 1px solid var(--border-subtle);
-            border-radius: 16px;
-            padding: 12px;
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-        }
-
-        .location-pill svg {
-            width: 16px;
-            height: 16px;
-            color: var(--brand-olive);
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-
-        .loc-title {
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--text-muted);
-            margin-bottom: 2px;
-        }
-
-        .loc-address {
-            font-size: 12.5px;
-            font-weight: 700;
-            color: var(--text-dark);
-            line-height: 1.35;
-        }
-
-        /* عنوان الأقسام */
-        .section-label {
-            font-size: 11.5px;
-            font-weight: 700;
-            color: var(--text-muted);
-            margin: 0 4px 10px;
-            display: block;
-        }
-
-        /* الأزرار والبطاقات التفاعلية */
-        .action-card {
-            background: var(--surface-item);
-            border: 1px solid var(--border-subtle);
-            border-radius: 18px;
-            margin-bottom: 10px;
-            transition: all 0.25s ease;
-            overflow: hidden;
-        }
-
-        .action-card:hover {
-            border-color: var(--border-hover);
-            box-shadow: 0 6px 18px rgba(35, 64, 13, 0.05);
-        }
-
-        /* زر الدفع الرئيسي (إنستاباي) */
-        .action-card.primary-action {
-            background: var(--brand-primary);
-            border-color: var(--brand-primary);
-        }
-
-        .action-header {
-            width: 100%;
-            padding: 15px 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
+            margin-bottom: 20px;
             text-align: right;
         }
 
-        .action-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
+        .location-item {
+            flex: 1;
+            background-color: #FFFFFF;
+            padding: 12px;
+            border-radius: 14px;
+            border: 1px solid rgba(35, 64, 13, 0.1);
         }
 
-        .icon-box {
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
-            background: var(--brand-olive-soft);
-            color: var(--brand-primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .primary-action .icon-box {
-            background: rgba(255, 255, 255, 0.12);
-            color: #F6EFE6;
-        }
-
-        .icon-box svg {
-            width: 20px;
-            height: 20px;
-        }
-
-        .action-title {
-            font-size: 14.5px;
+        .location-label {
+            font-size: 11px;
+            color: #787C44;
             font-weight: 700;
-            color: var(--text-dark);
+            margin-bottom: 2px;
         }
 
-        .action-sub {
-            font-size: 11.5px;
-            color: var(--text-muted);
-            font-weight: 500;
+        .location-text {
+            font-size: 12.5px;
+            color: #1E330C;
+            font-weight: 800;
+            line-height: 1.4;
         }
 
-        .primary-action .action-title {
-            color: #F6EFE6;
+        /* الأزرار الرئيسية */
+        .action-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 15px 18px;
+            margin: 10px 0;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14.5px;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            border: none;
         }
 
-        .primary-action .action-sub {
-            color: rgba(246, 239, 230, 0.7);
+        .action-btn:hover {
+            transform: translateY(-2px);
         }
 
-        .chevron {
-            width: 18px;
-            height: 18px;
-            color: var(--text-muted);
+        /* زر إنستاباي - الزر الرئيسي باللون الأخضر الداكن للهوية */
+        .btn-instapay {
+            background-color: #23400D;
+            color: #F7EFE6;
+            box-shadow: 0 8px 20px rgba(35, 64, 13, 0.25);
+        }
+
+        /* أزرار القوائم المنسدلة (البنك والمحافظ) */
+        .drawer-wrapper {
+            margin: 10px 0;
+        }
+
+        .drawer-toggle-btn {
+            background-color: #FFFFFF;
+            color: #1E330C;
+            width: 100%;
+            padding: 15px 18px;
+            border-radius: 16px;
+            font-weight: 800;
+            font-size: 14.5px;
+            border: 1px solid rgba(35, 64, 13, 0.14);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.25s ease;
+        }
+
+        .drawer-toggle-btn:hover {
+            border-color: #23400D;
+            background-color: #FCF9F5;
+        }
+
+        .arrow-icon {
+            font-size: 12px;
+            color: #787C44;
             transition: transform 0.3s ease;
         }
 
-        .primary-action .chevron {
-            color: rgba(246, 239, 230, 0.8);
-        }
-
-        .action-card.open .chevron {
-            transform: rotate(180deg);
-        }
-
-        /* القوائم المنسدلة الناعمة */
-        .accordion-body {
-            display: grid;
-            grid-template-rows: 0fr;
-            transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .action-card.open .accordion-body {
-            grid-template-rows: 1fr;
-        }
-
-        .accordion-inner {
+        /* القائمة المنسدلة */
+        .dropdown-box {
+            max-height: 0;
             overflow: hidden;
-            padding: 0 14px;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+            background-color: #FFFFFF;
+            border-radius: 16px;
+            margin-top: 6px;
+            padding: 0 12px;
         }
 
-        .action-card.open .accordion-inner {
-            padding: 4px 14px 14px;
-            border-top: 1px solid var(--border-subtle);
+        .dropdown-box.open {
+            max-height: 450px;
+            padding: 12px;
+            border: 1px solid rgba(35, 64, 13, 0.12);
         }
 
-        /* صفوف البيانات داخل القائمة */
-        .data-row {
+        .bank-title-tag {
+            font-size: 12px;
+            font-weight: 800;
+            color: #23400D;
+            background-color: rgba(120, 124, 68, 0.15);
+            padding: 5px 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .data-card-item {
+            background-color: #F7EFE6;
+            padding: 10px 12px;
+            border-radius: 12px;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            gap: 10px;
-            padding: 10px 4px;
-            border-bottom: 1px dashed rgba(35, 64, 13, 0.08);
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
         }
 
-        .data-row:last-child {
-            border-bottom: none;
-            padding-bottom: 2px;
+        .data-card-item:last-child {
+            margin-bottom: 0;
         }
 
-        .data-info {
+        .data-details {
+            text-align: right;
             overflow: hidden;
         }
 
-        .data-label {
+        .data-type {
             font-size: 11px;
-            color: var(--text-muted);
-            font-weight: 600;
-            margin-bottom: 2px;
+            color: #787C44;
+            font-weight: 700;
         }
 
-        .data-value {
+        .data-number {
             font-size: 13.5px;
-            font-weight: 700;
-            color: var(--text-dark);
+            color: #1E330C;
+            font-weight: 800;
             direction: ltr;
             text-align: right;
-            font-variant-numeric: tabular-nums;
             word-break: break-all;
         }
 
-        .copy-btn {
-            background: var(--surface-card);
-            color: var(--brand-primary);
-            border: 1px solid var(--border-subtle);
-            padding: 6px 12px;
+        .copy-trigger {
+            background-color: #23400D;
+            color: #F7EFE6;
+            border: none;
+            padding: 6px 14px;
             border-radius: 8px;
             font-size: 12px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 5px;
             flex-shrink: 0;
-            transition: all 0.2s ease;
+            transition: 0.2s;
         }
 
-        .copy-btn:hover {
-            background: var(--brand-primary);
-            color: #fff;
-            border-color: var(--brand-primary);
-        }
-
-        .copy-btn.copied {
-            background: var(--brand-primary);
-            color: #fff;
-        }
-
-        .copy-btn svg {
-            width: 14px;
-            height: 14px;
+        .copy-trigger:hover {
+            background-color: #365E17;
         }
 
         /* أزرار التواصل الاجتماعي */
-        .social-row {
+        .social-matrix {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(2, 1fr);
             gap: 10px;
-            margin-top: 20px;
+            margin: 16px 0;
         }
 
-        .social-btn {
-            background: var(--surface-item);
-            border: 1px solid var(--border-subtle);
-            border-radius:
+        .social-link {
+            padding: 12px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 13.5px;
+            background-color: #FFFFFF;
+            color: #1E330C;
+            border: 1px solid rgba(35, 64, 13, 0.12);
+            transition: all 0.2s ease;
+        }
+
+        .social-link:hover {
+            background-color: #23400D;
+            color: #F7EFE6;
+        }
+
+        /* بانر Tapio */
+        .self-promo-banner {
+            margin-top: 20px;
+            background-color: rgba(120, 124, 68, 0.12);
+            border: 1px dashed #787C44;
+            padding: 16px;
+            border-radius: 18px;
+        }
+
+        .promo-desc {
+            font-size: 12.5px;
+            color: #1E330C;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .promo-action-btn {
+            display: block;
+            background-color: #787C44;
+            color: #FFFFFF;
+            text-decoration: none;
+            padding: 11px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 13.5px;
+            transition: all 0.2s ease;
+        }
+
+        .promo-action-btn:hover {
+            background-color: #23400D;
+        }
+
+        .brand-footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #787C44;
+            border-top: 1px solid rgba(35, 64, 13, 0.1);
+            padding-top: 14px;
+            font-weight: 600;
+        }
+
+        .brand-footer span {
+            color: #23400D;
+            font-weight: 800;
+        }
+
+        /* إشعار النسخ */
+        .copy-toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #23400D;
+            color: #F7EFE6;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 700;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            display: none;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="profile-card">
+        <!-- شعار كيفان -->
+        <div class="main-logo-wrapper">
+            <img src="logo.jpg" alt="Kayfan Logo" class="main-logo">
+        </div>
+        
+        <div class="business-subtitle">لاستيراد وتجارة البن الأخضر</div>
+        
+        <!-- العناوين -->
+        <div class="locations-box">
+            <div class="location-item">
+                <div class="location-label">المخازن</div>
+                <div class="location-text">كفر الدوار - ش المحكمة</div>
+            </div>
+            <div class="location-item">
+                <div class="location-label">فرع الإسكندرية</div>
+                <div class="location-text">أبو قير</div>
+            </div>
+        </div>
+
+        <!-- إنستاباي -->
+        <a href="https://ipn.eg/S/islamfatthi/instapay/5jjyg5" class="action-btn btn-instapay" target="_blank">
+            <span>الدفع الفوري عبر InstaPay</span>
+            <span>‹</span>
+        </a>
+
+        <!-- الحساب البنكي - بنك المشرق -->
+        <div class="drawer-wrapper">
+            <button class="drawer-toggle-btn" onclick="toggleDrawer('bankDrawer', 'bankArrow')">
+                <span>الحساب البنكي (Mashreq Bank)</span>
+                <span id="bankArrow" class="arrow-icon">▼</span>
+            </button>
+            <div id="bankDrawer" class="dropdown-box">
+                <div class="bank-title-tag">Bank Name : Mashreq Bank</div>
+
+                <div class="data-card-item">
+                    <div class="data-details">
+                        <div class="data-type">اسم صاحب الحساب (Account Holder)</div>
+                        <div class="data-number">Eslam Fathy Mohamed</div>
+                    </div>
+                    <button class="copy-trigger" onclick="copyData('Eslam Fathy Mohamed', this)">نسخ</button>
+                </div>
+
+                <div class="data-card-item">
+                    <div class="data-details">
+                        <div class="data-type">رقم الحساب (Account Number)</div>
+                        <div class="data-number">059100571388</div>
+                    </div>
+                    <button class="copy-trigger" onclick="copyData('059100571388', this)">نسخ</button>
+                </div>
+
+                <div class="data-card-item">
+                    <div class="data-details">
+                        <div class="data-type">رقم الآيبان (IBAN)</div>
+                        <div class="data-number">EG360046020400000059100571388</div>
+                    </div>
+                    <button class="copy-trigger" onclick="copyData('EG360046020400000059100571388', this)">نسخ</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- المحافظ الإلكترونية -->
+        <div class="drawer-wrapper">
+            <button class="drawer-toggle-btn" onclick="toggleDrawer('walletDrawer', 'walletArrow')">
+                <span>محافظ فودافون كاش</span>
+                <span id="walletArrow" class="arrow-icon">▼</span>
+            </button>
+            <div id="walletDrawer" class="dropdown-box">
+                <div class="data-card-item">
+                    <div class="data-details">
+                        <div class="data-type">رقم المحفظة الأول</div>
+                        <div class="data-number">01060113064</div>
+                    </div>
+                    <button class="copy-trigger" onclick="copyData('01060113064', this)">نسخ</button>
+                </div>
+                <div class="data-card-item">
+                    <div class="data-details">
+                        <div class="data-type">رقم المحفظة الثاني</div>
+                        <div class="data-number">01032709464</div>
+                    </div>
+                    <button class="copy-trigger" onclick="copyData('01032709464', this)">نسخ</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- السوشيال ميديا -->
+        <div class="social-matrix">
+            <a href="https://wa.me/message/K3ZRBFLIQGXVI1" class="social-link" target="_blank">تواصل واتساب</a>
+            <a href="https://www.facebook.com/share/19etwy1QBC/?mibextid=wwXIfr" class="social-link" target="_blank">صفحة فيسبوك</a>
+        </div>
+
+        <!-- التسويق الذاتي -->
+        <div class="self-promo-banner">
+            <div class="promo-desc">عجبك الستاند الذكي وحابب تعمل واحد لمشروعك؟</div>
+            <a href="https://wa.me/201208884686?text=مرحباً%20ماضو،%20أعجبني%20نظام%20Tapio%20وأريد%20عمل%20ستاند%20ذكي%20لمشروعي" class="promo-action-btn" target="_blank">
+                احصل على ستاند ذكي لمشروعك الآن
+            </a>
+        </div>
+
+        <div class="brand-footer">
+            Powered by <span>Tapio</span>
+        </div>
+    </div>
+
+    <div id="copyToast" class="copy-toast">تم النسخ بنجاح ✓</div>
+
+    <script>
+        function toggleDrawer(drawerId, arrowId) {
+            var drawer = document.getElementById(drawerId);
+            var arrow = document.getElementById(arrowId);
+            var isOpen = drawer.classList.contains("open");
+
+            // إغلاق أي قائمة مفتوحة أخرى
+            document.getElementById("bankDrawer").classList.remove("open");
+            document.getElementById("walletDrawer").classList.remove("open");
+            document.getElementById("bankArrow").style.transform = "rotate(0deg)";
+            document.getElementById("walletArrow").style.transform = "rotate(0deg)";
+
+            if (!isOpen) {
+                drawer.classList.add("open");
+                arrow.style.transform = "rotate(180deg)";
+            }
+        }
+
+        function copyData(text, btn) {
+            navigator.clipboard.writeText(text);
+            var oldText = btn.innerText;
+            btn.innerText = "تم ✓";
+
+            var toast = document.getElementById("copyToast");
+            toast.style.display = "block";
+
+            setTimeout(function() {
+                btn.innerText = oldText;
+                toast.style.display = "none";
+            }, 1800);
+        }
+    </script>
+
+</body>
+</html>
